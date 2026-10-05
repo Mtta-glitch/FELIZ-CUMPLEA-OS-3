@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi oruguita 🌷</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:Georgia,serif;
+}
+
+body{
+    background:#000;
+}
+
+/* =========================
+   ESCENA
+========================= */
+
+#scene{
+    position:relative;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #4b7196 0%,
+            #829eae 38%,
+            #e5a27e 68%,
+            #dc7767 100%
+        );
+
+    transition:
+        background 12s ease;
+}
+
+#scene.night{
+    background:
+        linear-gradient(
+            to bottom,
+            #07152c 0%,
+            #101e3a 38%,
+            #26324d 70%,
+            #18262c 100%
+        );
+}
+
+/* =========================
+   INTRO
+========================= */
+
+#intro{
+    position:absolute;
+    inset:0;
+    z-index:200;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #101b30,
+            #26384d
+        );
+
+    color:white;
+    text-align:center;
+
+    transition:
+        opacity 1.5s ease,
+        visibility 1.5s ease;
+}
+
+#intro.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+#intro h1{
+    font-size:clamp(26px,5vw,50px);
+    margin:0 20px 15px;
+    font-weight:normal;
+}
+
+#intro p{
+    font-size:clamp(15px,2vw,22px);
+    margin:0 20px 30px;
+    opacity:.9;
+}
+
+#startBtn{
+    border:none;
+    padding:15px 30px;
+
+    border-radius:30px;
+
+    background:#ffffff;
+    color:#3c5568;
+
+    font-size:17px;
+    font-family:Georgia,serif;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.25);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+#startBtn:hover{
+    transform:scale(1.06);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.35);
+}
+
+/* =========================
+   ESTRELLAS
+========================= */
+
+.star{
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    background:white;
+    border-radius:50%;
+
+    opacity:0;
+
+    transition:
+        opacity 5s ease;
+}
+
+#scene.night .star{
+    opacity:.85;
+}
+
+/* =========================
+   SOL
+========================= */
+
+.sun{
+    position:absolute;
+
+    left:-12%;
+    top:38%;
+
+    width:145px;
+    height:145px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fffbd0 0%,
+            #ffe89b 45%,
+            #ffc86b 70%,
+            rgba(255,200,107,.2) 100%
+        );
+
+    box-shadow:
+        0 0 50px rgba(255,220,130,.8),
+        0 0 100px rgba(255,180,100,.5);
+
+    z-index:5;
+
+    transition:
+        left 36s cubic-bezier(.45,0,.55,1),
+        opacity 7s ease;
+}
+
+#scene.sunset .sun{
+    left:112%;
+}
+
+#scene.night .sun{
+    left:112%;
+    opacity:0;
+}
+
+/* =========================
+   NUBES
+========================= */
+
+.cloud{
+    position:absolute;
+
+    width:180px;
+    height:55px;
+
+    background:rgba(255,255,255,.22);
+
+    border-radius:50px;
+
+    filter:blur(1px);
+
+    z-index:4;
+}
+
+.cloud:before,
+.cloud:after{
+    content:"";
+
+    position:absolute;
+
+    background:inherit;
+
+    border-radius:50%;
+}
+
+.cloud:before{
+    width:75px;
+    height:75px;
+
+    left:25px;
+    top:-35px;
+}
+
+.cloud:after{
+    width:90px;
+    height:90px;
+
+    right:20px;
+    top:-45px;
+}
+
+.cloud1{
+    top:16%;
+    left:8%;
+    transform:scale(.8);
+}
+
+.cloud2{
+    top:25%;
+    left:62%;
+    transform:scale(.65);
+}
+
+.cloud3{
+    top:9%;
+    left:42%;
+    transform:scale(.5);
+}
+
+/* =========================
+   MONTAÑAS
+========================= */
+
+.mountains{
+    position:absolute;
+
+    left:0;
+    bottom:32%;
+
+    width:100%;
+    height:42%;
+
+    z-index:7;
+}
+
+.mountain{
+    position:absolute;
+
+    bottom:0;
+
+    width:0;
+    height:0;
+
+    border-left:180px solid transparent;
+    border-right:180px solid transparent;
+    border-bottom:300px solid #536d6d;
+}
+
+.mountain1{
+    left:0;
+}
+
+.mountain2{
+    left:22%;
+    transform:scale(1.2);
+}
+
+.mountain3{
+    left:50%;
+    transform:scale(.9);
+}
+
+.mountain4{
+    left:70%;
+    transform:scale(1.3);
+}
+
+/* =========================
+   COLINAS
+========================= */
+
+.hills{
+    position:absolute;
+
+    bottom:27%;
+
+    width:100%;
+    height:30%;
+
+    z-index:10;
+}
+
+.hill{
+    position:absolute;
+
+    bottom:0;
+
+    width:60%;
+    height:100%;
+
+    border-radius:50% 50% 0 0;
+
+    background:#486b4f;
+}
+
+.hill1{
+    left:-15%;
+}
+
+.hill2{
+    right:-20%;
+
+    transform:scale(1.15);
+}
+
+/* =========================
+   CAMPO
+========================= */
+
+.field{
+    position:absolute;
+
+    bottom:0;
+    left:0;
+
+    width:100%;
+    height:40%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #416b48,
+            #294c32
+        );
+
+    z-index:20;
+}
+
+/* =========================
+   PROFUNDIDAD DEL CAMPO
+========================= */
+
+.depth-line{
+    position:absolute;
+
+    left:-10%;
+    width:120%;
+
+    height:120px;
+
+    border-radius:50%;
+
+    border-top:
+        2px solid rgba(255,255,255,.06);
+
+    transform:rotate(-3deg);
+}
+
+.depth1{
+    top:15%;
+}
+
+.depth2{
+    top:40%;
+}
+
+.depth3{
+    top:67%;
+}
+
+/* =========================
+   HIERBA
+========================= */
+
+.grass{
+    position:absolute;
+
+    width:3px;
+
+    background:
+        linear-gradient(
+            to top,
+            #24462d,
+            #5e914d
+        );
+
+    transform-origin:bottom;
+
+    border-radius:3px;
+
+    z-index:25;
+}
+
+.grass:before,
+.grass:after{
+    content:"";
+
+    position:absolute;
+
+    bottom:30%;
+
+    width:2px;
+    height:45%;
+
+    background:#4e8144;
+
+    transform-origin:bottom;
+}
+
+.grass:before{
+    transform:rotate(-30deg);
+}
+
+.grass:after{
+    transform:rotate(30deg);
+}
+
+.tuft{
+    position:absolute;
+
+    width:50px;
+    height:25px;
+
+    z-index:26;
+}
+
+.tuft span{
+    position:absolute;
+
+    bottom:0;
+    left:50%;
+
+    width:3px;
+    height:30px;
+
+    background:#527e46;
+
+    transform-origin:bottom;
+}
+
+.tuft span:nth-child(1){
+    transform:rotate(-35deg);
+}
+
+.tuft span:nth-child(2){
+    transform:rotate(-18deg);
+}
+
+.tuft span:nth-child(3){
+    transform:rotate(0deg);
+}
+
+.tuft span:nth-child(4){
+    transform:rotate(18deg);
+}
+
+.tuft span:nth-child(5){
+    transform:rotate(35deg);
+}
+
+/* =========================
+   TULIPANES
+========================= */
+
+.tulip{
+    position:absolute;
+
+    width:50px;
+    height:120px;
+
+    z-index:40;
+
+    transform-origin:bottom;
+}
+
+.tulip-stem{
+    position:absolute;
+
+    bottom:0;
+    left:50%;
+
+    width:6px;
+    height:80px;
+
+    background:
+        linear-gradient(
+            to right,
+            #315c38,
+            #568b50
+        );
+
+    transform:translateX(-50%);
+
+    border-radius:5px;
+}
+
+.tulip-leaf{
+    position:absolute;
+
+    bottom:30px;
+
+    width:25px;
+    height:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #477d48,
+            #285331
+        );
+
+    border-radius:
+        100% 0 100% 0;
+
+    transform-origin:bottom;
+}
+
+.tulip-leaf.left{
+    left:5px;
+    transform:rotate(-30deg);
+}
+
+.tulip-leaf.right{
+    right:5px;
+    transform:
+        scaleX(-1)
+        rotate(-30deg);
+}
+
+.tulip-head{
+    position:absolute;
+
+    left:50%;
+    bottom:65px;
+
+    width:45px;
+    height:50px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        45% 45% 50% 50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #a83950,
+            #e06b79,
+            #a83950
+        );
+
+    box-shadow:
+        inset 0 4px 10px rgba(255,255,255,.25),
+        0 4px 8px rgba(0,0,0,.15);
+}
+
+.tulip-head:before,
+.tulip-head:after{
+    content:"";
+
+    position:absolute;
+
+    bottom:5px;
+
+    width:27px;
+    height:42px;
+
+    background:inherit;
+
+    border-radius:
+        50% 50% 45% 45%;
+}
+
+.tulip-head:before{
+    left:-5px;
+    transform:rotate(-15deg);
+}
+
+.tulip-head:after{
+    right:-5px;
+    transform:rotate(15deg);
+}
+
+.tulip.yellow .tulip-head{
+    background:
+        linear-gradient(
+            90deg,
+            #d69c32,
+            #ffe27d,
+            #d69c32
+        );
+}
+
+.tulip.pink .tulip-head{
+    background:
+        linear-gradient(
+            90deg,
+            #c34f7d,
+            #f39ab8,
+            #c34f7d
+        );
+}
+
+.tulip.white .tulip-head{
+    background:
+        linear-gradient(
+            90deg,
+            #d9d9d9,
+            #ffffff,
+            #d9d9d9
+        );
+}
+
+/* =========================
+   LILY OF THE VALLEY
+========================= */
+
+.lily{
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    z-index:38;
+}
+
+.lily-stem{
+    position:absolute;
+
+    left:50%;
+
+    bottom:15px;
+
+    width:4px;
+    height:80px;
+
+    background:#527d45;
+
+    transform:
+        rotate(
+            var(--angle)
+        );
+
+    transform-origin:bottom;
+}
+
+.lily-leaf{
+    position:absolute;
+
+    bottom:0;
+
+    width:35px;
+    height:75px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5b914d,
+            #294e31
+        );
+
+    border-radius:
+        100% 0 100% 0;
+}
+
+.lily-leaf.left{
+    left:15px;
+    transform:rotate(-20deg);
+}
+
+.lily-leaf.right{
+    right:15px;
+    transform:
+        scaleX(-1)
+        rotate(-20deg);
+}
+
+.lily-flower{
+    position:absolute;
+
+    width:16px;
+    height:16px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            white,
+            #e9edf0
+        );
+
+    box-shadow:
+        0 2px 4px rgba(0,0,0,.15);
+}
+
+/* =========================
+   FLORES DE VIDRIO
+========================= */
+
+.glass-flower{
+    position:absolute;
+
+    width:90px;
+    height:90px;
+
+    z-index:39;
+}
+
+.glass-petal{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:30px;
+    height:55px;
+
+    transform-origin:
+        50% 100%;
+
+    border-radius:
+        50% 50% 45% 45%;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(210,250,255,.55),
+            rgba(130,220,240,.12)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.7);
+
+    box-shadow:
+        inset 0 0 12px rgba(255,255,255,.5),
+        0 0 10px rgba(180,240,255,.25);
+}
+
+.glass-center{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:20px;
+    height:20px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff6b5,
+            #e8c75a
+        );
+
+    box-shadow:
+        0 0 12px rgba(255,220,100,.6);
+}
+
+/* =========================
+   FLORES PEQUEÑAS
+========================= */
+
+.small-flower{
+    position:absolute;
+
+    width:8px;
+    height:8px;
+
+    background:white;
+
+    border-radius:50%;
+
+    z-index:37;
+
+    box-shadow:
+        0 0 4px rgba(255,255,255,.6);
+}
+
+/* =========================
+   MARIPOSAS
+========================= */
+
+.butterfly{
+    position:absolute;
+
+    width:90px;
+    height:75px;
+
+    z-index:50;
+
+    transition:
+        left 6s cubic-bezier(.25,.1,.25,1),
+        top 6s cubic-bezier(.25,.1,.25,1);
+
+    animation:
+        butterflyPath var(--flight)
+        ease-in-out infinite;
+}
+
+.butterfly-inner{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:14px;
+    height:45px;
+
+    transform:
+        translate(-50%,-50%);
+
+    background:
+        linear-gradient(
+            to bottom,
+            #3b2830,
+            #18151b
+        );
+
+    border-radius:50%;
+}
+
+.butterfly-head{
+    position:absolute;
+
+    left:50%;
+    top:-7px;
+
+    width:14px;
+    height:14px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:50%;
+
+    background:#17151a;
+}
+
+.antenna{
+    position:absolute;
+
+    top:-12px;
+
+    width:2px;
+    height:15px;
+
+    background:#17151a;
+
+    transform-origin:bottom;
+}
+
+.antenna.left{
+    left:2px;
+    transform:rotate(-25deg);
+}
+
+.antenna.right{
+    right:2px;
+    transform:rotate(25deg);
+}
+
+.wing{
+    position:absolute;
+
+    width:38px;
+    height:45px;
+
+    border-radius:
+        65% 35% 65% 35%;
+
+    opacity:.95;
+
+    filter:
+        drop-shadow(
+            0 3px 3px rgba(0,0,0,.2)
+        );
+}
+
+.wing.upper-left{
+    right:8px;
+    top:-2px;
+
+    transform:
+        rotate(-20deg);
+}
+
+.wing.upper-right{
+    left:8px;
+    top:-2px;
+
+    transform:
+        scaleX(-1)
+        rotate(-20deg);
+}
+
+.wing.lower-left{
+    right:7px;
+    bottom:0;
+
+    width:30px;
+    height:32px;
+
+    transform:
+        rotate(15deg);
+}
+
+.wing.lower-right{
+    left:7px;
+    bottom:0;
+
+    width:30px;
+    height:32px;
+
+    transform:
+        scaleX(-1)
+        rotate(15deg);
+}
+
+.butterfly1 .wing{
+    background:
+        linear-gradient(
+            135deg,
+            #f2b5d4,
+            #bd6fa5
+        );
+}
+
+.butterfly2 .wing{
+    background:
+        linear-gradient(
+            135deg,
+            #a7d7ed,
+            #557db5
+        );
+}
+
+.butterfly3 .wing{
+    background:
+        linear-gradient(
+            135deg,
+            #f3d28d,
+            #cf8654
+        );
+}
+
+@keyframes butterflyPath{
+
+    0%{
+        transform:
+            translate(0,0)
+            rotate(-3deg);
+    }
+
+    25%{
+        transform:
+            translate(40px,-25px)
+            rotate(4deg);
+    }
+
+    50%{
+        transform:
+            translate(80px,15px)
+            rotate(-4deg);
+    }
+
+    75%{
+        transform:
+            translate(35px,35px)
+            rotate(3deg);
+    }
+
+    100%{
+        transform:
+            translate(0,0)
+            rotate(-3deg);
+    }
+}
+
+/* =========================
+   LUCIÉRNAGAS
+========================= */
+
+.firefly{
+    position:absolute;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#fff7a3;
+
+    box-shadow:
+        0 0 8px #fff39a,
+        0 0 16px rgba(255,240,120,.8);
+
+    opacity:0;
+
+    z-index:45;
+
+    transition:
+        opacity 1.5s ease;
+}
+
+.firefly.active{
+    opacity:1;
+
+    animation:
+        fireflyGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes fireflyGlow{
+
+    from{
+        opacity:.25;
+        transform:scale(.8);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.25);
+    }
+}
+
+/* =========================
+   LUNA
+========================= */
+
+.moon{
+    position:absolute;
+
+    left:-12%;
+    top:16%;
+
+    width:105px;
+    height:105px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 35%,
+            #ffffff,
+            #dfe7ef 55%,
+            #aeb8c7 100%
+        );
+
+    box-shadow:
+        0 0 30px rgba(220,235,255,.6),
+        0 0 70px rgba(180,210,255,.25);
+
+    z-index:6;
+
+    opacity:0;
+
+    transition:
+        left 18s cubic-bezier(.45,0,.55,1),
+        opacity 10s ease-in-out;
+}
+
+#scene.moonrise .moon{
+    left:78%;
+    opacity:1;
+}
+
+/* =========================
+   BRILLO NOCTURNO
+========================= */
+
+.night-glow{
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle at 70% 20%,
+            rgba(130,170,255,.12),
+            transparent 40%
+        );
+
+    opacity:0;
+
+    transition:
+        opacity 8s ease;
+
+    z-index:8;
+}
+
+#scene.night .night-glow{
+    opacity:1;
+}
+
+/* =========================
+   MENSAJE
+========================= */
+
+.message{
+    position:absolute;
+
+    left:50%;
+    bottom:8%;
+
+    transform:
+        translateX(-50%);
+
+    width:min(90%,700px);
+
+    text-align:center;
+
+    color:white;
+
+    z-index:100;
+
+    opacity:0;
+
+    transition:
+        opacity 4s ease;
+}
+
+#scene.night .message{
+    opacity:1;
+}
+
+.message h2{
+    margin:0 0 10px;
+
+    font-size:
+        clamp(24px,4vw,42px);
+
+    font-weight:normal;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.4);
+}
+
+.message p{
+    margin:0;
+
+    font-size:
+        clamp(15px,2vw,21px);
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.4);
+}
+
+.signature{
+    margin-top:18px;
+
+    font-size:15px;
+
+    opacity:.9;
+
+    line-height:1.7;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:600px){
+
+    .sun{
+        width:110px;
+        height:110px;
+    }
+
+    .moon{
+        width:80px;
+        height:80px;
+    }
+
+    .butterfly{
+        transform:scale(.75);
+    }
+
+    .message{
+        bottom:5%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="scene">
+
+    <!-- MÚSICA -->
+    <audio id="birthdayMusic" loop preload="auto">
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- INTRO -->
+    <div id="intro">
+
+        <h1>🌱 Tengo algo para ti...</h1>
+
+        <p>
+            Algunas cosas bonitas necesitan tiempo para florecer.
+        </p>
+
+        <button id="startBtn">
+            Abrir sorpresa 🌷
+        </button>
+
+    </div>
+
+    <!-- ESTRELLAS -->
+    <div id="stars"></div>
+
+    <!-- SOL -->
+    <div class="sun"></div>
+
+    <!-- NUBES -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+
+    <!-- MONTAÑAS -->
+    <div class="mountains">
+
+        <div class="mountain mountain1"></div>
+        <div class="mountain mountain2"></div>
+        <div class="mountain mountain3"></div>
+        <div class="mountain mountain4"></div>
+
+    </div>
+
+    <!-- COLINAS -->
+    <div class="hills">
+
+        <div class="hill hill1"></div>
+        <div class="hill hill2"></div>
+
+    </div>
+
+    <!-- CAMPO -->
+    <div class="field">
+
+        <div class="depth-line depth1"></div>
+        <div class="depth-line depth2"></div>
+        <div class="depth-line depth3"></div>
+
+    </div>
+
+    <!-- HIERBA -->
+    <div id="grass"></div>
+
+    <!-- TULIPANES -->
+    <div id="tulips"></div>
+
+    <!-- LILYS -->
+    <div id="lilies"></div>
+
+    <!-- FLORES DE VIDRIO -->
+    <div id="glassFlowers"></div>
+
+    <!-- FLORES PEQUEÑAS -->
+    <div id="smallFlowers"></div>
+
+    <!-- MARIPOSA 1 -->
+    <div
+        class="butterfly butterfly1"
+        id="butterfly1"
+        style="
+            left:18%;
+            top:38%;
+            --flight:8s;
+        "
+    >
+
+        <div class="butterfly-inner">
+
+            <div class="butterfly-head"></div>
+
+            <div class="antenna left"></div>
+            <div class="antenna right"></div>
+
+            <div class="wing upper-left"></div>
+            <div class="wing upper-right"></div>
+
+            <div class="wing lower-left"></div>
+            <div class="wing lower-right"></div>
+
+        </div>
+
+    </div>
+
+    <!-- MARIPOSA 2 -->
+    <div
+        class="butterfly butterfly2"
+        id="butterfly2"
+        style="
+            left:52%;
+            top:30%;
+            --flight:10s;
+        "
+    >
+
+        <div class="butterfly-inner">
+
+            <div class="butterfly-head"></div>
+
+            <div class="antenna left"></div>
+            <div class="antenna right"></div>
+
+            <div class="wing upper-left"></div>
+            <div class="wing upper-right"></div>
+
+            <div class="wing lower-left"></div>
+            <div class="wing lower-right"></div>
+
+        </div>
+
+    </div>
+
+    <!-- MARIPOSA 3 -->
+    <div
+        class="butterfly butterfly3"
+        id="butterfly3"
+        style="
+            left:75%;
+            top:44%;
+            --flight:9s;
+        "
+    >
+
+        <div class="butterfly-inner">
+
+            <div class="butterfly-inner">
+
+                <div class="butterfly-head"></div>
+
+                <div class="antenna left"></div>
+                <div class="antenna right"></div>
+
+                <div class="wing upper-left"></div>
+                <div class="wing upper-right"></div>
+
+                <div class="wing lower-left"></div>
+                <div class="wing lower-right"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- LUCIÉRNAGAS -->
+    <div id="fireflies"></div>
+
+    <!-- LUNA -->
+    <div class="moon"></div>
+
+    <!-- BRILLO NOCTURNO -->
+    <div class="night-glow"></div>
+
+    <!-- MENSAJE -->
+    <div class="message">
+
+        <h2>
+            Para mi oruguita ❤️
+        </h2>
+
+        <p>
+            Una pequeña parte de todo lo bonito
+            que haces florecer.
+        </p>
+
+        <div class="signature">
+            <div>Feliz cumpleaños 🎂</div>
+            <div>Hecho con cariño ❤️</div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* =========================
+   ELEMENTOS
+========================= */
+
+const scene =
+    document.getElementById("scene");
+
+const intro =
+    document.getElementById("intro");
+
+const startBtn =
+    document.getElementById("startBtn");
+
+const music =
+    document.getElementById("birthdayMusic");
+
+
+/* =========================
+   ESTRELLAS
+========================= */
+
+const stars =
+    document.getElementById("stars");
+
+for(let i=0;i<100;i++){
+
+    const star =
+        document.createElement("div");
+
+    star.className="star";
+
+    star.style.left =
+        Math.random()*100+"%";
+
+    star.style.top =
+        Math.random()*65+"%";
+
+    star.style.opacity =
+        Math.random()*.8;
+
+    stars.appendChild(star);
+}
+
+
+/* =========================
+   HIERBA
+========================= */
+
+const grass =
+    document.getElementById("grass");
+
+for(let i=0;i<260;i++){
+
+    const blade =
+        document.createElement("div");
+
+    blade.className="grass";
+
+    blade.style.left =
+        Math.random()*100+"%";
+
+    blade.style.bottom =
+        Math.random()*38+"%";
+
+    blade.style.height =
+        (15+Math.random()*35)+"px";
+
+    blade.style.transform =
+        `rotate(${(-15+Math.random()*30)}deg)`;
+
+    grass.appendChild(blade);
+}
+
+
+/* =========================
+   TUFOS
+========================= */
+
+for(let i=0;i<55;i++){
+
+    const tuft =
+        document.createElement("div");
+
+    tuft.className="tuft";
+
+    tuft.style.left =
+        Math.random()*100+"%";
+
+    tuft.style.bottom =
+        Math.random()*35+"%";
+
+    for(let j=0;j<5;j++){
+
+        const span =
+            document.createElement("span");
+
+        tuft.appendChild(span);
+
+    }
+
+    grass.appendChild(tuft);
+}
+
+
+/* =========================
+   TULIPANES
+========================= */
+
+const tulips =
+    document.getElementById("tulips");
+
+const tulipColors=[
+    "",
+    "yellow",
+    "pink",
+    "white"
+];
+
+for(let i=0;i<20;i++){
+
+    const tulip =
+        document.createElement("div");
+
+    tulip.className =
+        "tulip "+
+        tulipColors[
+            Math.floor(
+                Math.random()*tulipColors.length
+            )
+        ];
+
+    tulip.style.left =
+        (5+Math.random()*90)+"%";
+
+    tulip.style.bottom =
+        (5+Math.random()*25)+"%";
+
+    tulip.style.transform =
+        `scale(${.65+Math.random()*.5})`;
+
+    tulip.innerHTML=`
+
+        <div class="tulip-stem"></div>
+
+        <div class="tulip-leaf left"></div>
+        <div class="tulip-leaf right"></div>
+
+        <div class="tulip-head"></div>
+
+    `;
+
+    tulips.appendChild(tulip);
+}
+
+
+/* =========================
+   LILIES
+========================= */
+
+const lilies =
+    document.getElementById("lilies");
+
+for(let i=0;i<5;i++){
+
+    const lily =
+        document.createElement("div");
+
+    lily.className="lily";
+
+    lily.style.left =
+        (5+Math.random()*85)+"%";
+
+    lily.style.bottom =
+        (5+Math.random()*25)+"%";
+
+    lily.innerHTML=`
+
+        <div class="lily-leaf left"></div>
+        <div class="lily-leaf right"></div>
+
+    `;
+
+    for(let j=0;j<7;j++){
+
+        const stem =
+            document.createElement("div");
+
+        stem.className="lily-stem";
+
+        stem.style.setProperty(
+            "--angle",
+            (-25+Math.random()*50)+"deg"
+        );
+
+        const flower =
+            document.createElement("div");
+
+        flower.className="lily-flower";
+
+        flower.style.left =
+            (20+Math.random()*55)+"%";
+
+        flower.style.top =
+            (5+Math.random()*55)+"%";
+
+        stem.appendChild(flower);
+
+        lily.appendChild(stem);
+    }
+
+    lilies.appendChild(lily);
+}
+
+
+/* =========================
+   FLORES DE VIDRIO
+========================= */
+
+const glassFlowers =
+    document.getElementById("glassFlowers");
+
+for(let i=0;i<3;i++){
+
+    const flower =
+        document.createElement("div");
+
+    flower.className="glass-flower";
+
+    flower.style.left =
+        (10+Math.random()*80)+"%";
+
+    flower.style.bottom =
+        (10+Math.random()*25)+"%";
+
+    for(let j=0;j<6;j++){
+
+        const petal =
+            document.createElement("div");
+
+        petal.className="glass-petal";
+
+        petal.style.transform =
+            `translate(-50%,-100%)
+             rotate(${j*60}deg)`;
+
+        flower.appendChild(petal);
+
+    }
+
+    const center =
+        document.createElement("div");
+
+    center.className="glass-center";
+
+    flower.appendChild(center);
+
+    glassFlowers.appendChild(flower);
+}
+
+
+/* =========================
+   FLORES PEQUEÑAS
+========================= */
+
+const smallFlowers =
+    document.getElementById("smallFlowers");
+
+for(let i=0;i<38;i++){
+
+    const flower =
+        document.createElement("div");
+
+    flower.className="small-flower";
+
+    flower.style.left =
+        Math.random()*100+"%";
+
+    flower.style.bottom =
+        Math.random()*30+"%";
+
+    smallFlowers.appendChild(flower);
+}
+
+
+/* =========================
+   LUCIÉRNAGAS
+========================= */
+
+const fireflies =
+    document.getElementById("fireflies");
+
+const fireflyList=[];
+
+for(let i=0;i<38;i++){
+
+    const fly =
+        document.createElement("div");
+
+    fly.className="firefly";
+
+    fly.style.left =
+        Math.random()*100+"%";
+
+    fly.style.top =
+        (35+Math.random()*50)+"%";
+
+    fly.style.animationDelay =
+        Math.random()*2+"s";
+
+    fireflies.appendChild(fly);
+
+    fireflyList.push(fly);
+}
+
+
+/* =========================
+   MARIPOSAS
+========================= */
+
+function sendButterflyAway(
+    butterfly,
+    direction
+){
+
+    butterfly.style.animationPlayState =
+        "paused";
+
+    if(direction==="left"){
+
+        butterfly.style.left="-20%";
+
+        butterfly.style.top=
+            (20+Math.random()*50)+"%";
+
+    }
+
+    if(direction==="up"){
+
+        butterfly.style.left=
+            (20+Math.random()*60)+"%";
+
+        butterfly.style.top="-20%";
+
+    }
+
+    if(direction==="right"){
+
+        butterfly.style.left="120%";
+
+        butterfly.style.top=
+            (20+Math.random()*50)+"%";
+
+    }
+
+    setTimeout(()=>{
+
+        butterfly.style.display="none";
+
+    },6500);
+
+}
+
+
+/* =========================
+   BOTÓN
+========================= */
+
+startBtn.addEventListener(
+    "click",
+    ()=>{
+
+        intro.classList.add("hide");
+
+        /* MÚSICA */
+        music.volume=0.35;
+
+        music.play().catch(()=>{});
+
+
+        /* CICLO */
+
+        setTimeout(
+            ()=>{
+                scene.classList.add("sunset");
+            },
+            100
+        );
+
+
+        /* LUNA */
+
+        setTimeout(
+            ()=>{
+                scene.classList.add("moonrise");
+            },
+            18000
+        );
+
+
+        /* LUCIÉRNAGAS */
+
+        setTimeout(
+            ()=>{
+
+                fireflyList.forEach(
+                    (fly,index)=>{
+
+                        setTimeout(
+                            ()=>{
+                                fly.classList.add("active");
+                            },
+                            index*470
+                        );
+
+                    }
+                );
+
+            },
+            18500
+        );
+
+
+        /* MARIPOSA 1 */
+
+        setTimeout(
+            ()=>{
+
+                sendButterflyAway(
+                    document.getElementById(
+                        "butterfly1"
+                    ),
+                    "left"
+                );
+
+            },
+            22000
+        );
+
+
+        /* MARIPOSA 2 */
+
+        setTimeout(
+            ()=>{
+
+                sendButterflyAway(
+                    document.getElementById(
+                        "butterfly2"
+                    ),
+                    "up"
+                );
+
+            },
+            28000
+        );
+
+
+        /* MARIPOSA 3 */
+
+        setTimeout(
+            ()=>{
+
+                sendButterflyAway(
+                    document.getElementById(
+                        "butterfly3"
+                    ),
+                    "right"
+                );
+
+            },
+            33000
+        );
+
+
+        /* NOCHE */
+
+        setTimeout(
+            ()=>{
+
+                scene.classList.add("night");
+
+                fireflyList.forEach(
+                    fly=>{
+                        fly.classList.add("active");
+                    }
+                );
+
+            },
+            36000
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>
